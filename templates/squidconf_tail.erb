@@ -1,0 +1,19 @@
+
+# Example rule allowing access from your local networks.
+# Adapt localnet in the ACL section to list your (internal) IP networks
+# from where browsing should be allowed
+<% if defined?(@localnet) -%>
+http_access <%= @localnet_action %> localnet
+<% end -%>
+http_access <%= @localhost_action %> localhost
+
+# And finally deny all other access to this proxy
+http_access <%= @default_action %> all
+
+#
+# Add any of your own refresh_pattern entries above these.
+#
+refresh_pattern ^ftp:		1440	20%	10080
+refresh_pattern ^gopher:	1440	0%	1440
+refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
+refresh_pattern .		0	20%	4320

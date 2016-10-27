@@ -1,0 +1,58 @@
+#
+# puppet managed file
+#
+
+# Squid normally listens to port 3128
+http_port <%= @port %>
+
+# cache
+<%- if @disable_cache -%>
+cache deny all
+<%- end -%>
+
+# visibility options:
+httpd_suppress_version_string <%= scope.function_bool2onoff([@httpd_suppress_version_string]) %>
+via <%= scope.function_bool2onoff([@add_via_header]) %>
+forwarded_for <%= scope.function_bool2onoff([@add_forwarded_for_header]) %>
+
+# query options logging
+strip_query_terms <%= scope.function_bool2onoff([@strip_query_terms]) %>
+
+# Uncomment and adjust the following to add a disk cache directory.
+#cache_dir ufs /var/spool/squid 100 16 256
+
+# Leave coredumps in the first cache dir
+coredump_dir <%= @coredump_dir %>
+
+# localhost
+acl localhost src 127.0.0.0/8
+
+<%- if defined?(@localnet) -%>
+# local networks
+<% @localnet.each do | value | -%>
+acl localnet src <%= value %>
+<% end -%>
+<% end -%>
+
+# SSL ports
+<% @ssl_ports.each do | value | -%>
+acl SSL_ports port <%= value %>
+<% end -%>
+
+# safe ports
+<% @safe_ports.each do | value | -%>
+acl Safe_ports port <%= value %>
+<% end -%>
+
+# CONNECT
+acl CONNECT method CONNECT
+
+# requests to unsafe ports
+http_access <%= @unsafeports_action %> !Safe_ports
+
+# CONNECT to other than secure SSL ports
+http_access deny CONNECT !SSL_ports
+
+#
+# TODO: extra rules
+#
