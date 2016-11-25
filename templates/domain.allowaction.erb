@@ -1,0 +1,2 @@
+acl <%= @action %>_url dstdomain "<%= scope.lookupvar('squid::params::config_dir') %>/squid.<%= @action %>.acl"
+http_access <%= @action %> <%= @action %>_url

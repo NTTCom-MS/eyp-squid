@@ -2,6 +2,8 @@
 #
 # === squid documentation
 #
+# squid SSO: https://www.safesquid.com/content-filtering/integrating-linux-host-windows-ad-kerberos-sso-authentication#h.wjz66pyxofmp
+#
 class squid (
               $port                          = '0.0.0.0:3128',
               $disable_cache                 = true,

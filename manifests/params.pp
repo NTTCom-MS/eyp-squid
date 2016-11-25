@@ -4,6 +4,7 @@ class squid::params {
   $service_name = 'squid'
 
   $config_file = '/etc/squid/squid.conf'
+  $config_dir = '/etc/squid'
 
   case $::osfamily
   {
