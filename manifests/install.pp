@@ -10,6 +10,16 @@ class squid::install inherits squid {
     package { $squid::params::package_name:
       ensure => $squid::package_ensure,
     }
+
+    if($squid::install_client)
+    {
+      if($squid::params::client_package_name!=undef)
+      {
+        package { $squid::params::client_package_name:
+          ensure => $squid::package_ensure,
+        }
+      }
+    }
   }
 
 }

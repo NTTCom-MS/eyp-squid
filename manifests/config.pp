@@ -7,7 +7,7 @@ class squid::config inherits squid {
   concat { $squid::params::config_file:
     ensure  => 'present',
     owner   => 'root',
-    group   => 'squid',
+    group   => $squid::params::squid_username,
     mode    => '0640',
   }
 

@@ -14,7 +14,7 @@ class squid (
               $coredump_dir                  = '/var/spool/squid',
               $localnet                      = [ '10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', 'fc00::/7', 'fe80::/10' ],
               $ssl_ports                     = [ '443' ],
-              $safe_ports                    = [ '80', '21', '443' ],
+              $safe_ports                    = [ '80', '21', '443', '3128' ],
               $unsafeports_action            = 'deny',
               $localnet_action               = 'allow',
               $localhost_action              = 'allow',
@@ -25,6 +25,10 @@ class squid (
               $manage_docker_service         = true,
               $service_ensure                = 'running',
               $service_enable                = true,
+              $manager_allow                 = [ 'localhost' ],
+              $manager_default_rule          = 'deny',
+              $install_client                = true,
+              $visible_hostname              = undef,
             ) inherits squid::params{
 
   class { '::squid::install': } ->

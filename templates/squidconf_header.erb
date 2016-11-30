@@ -5,8 +5,8 @@
 # Squid normally listens to port 3128
 http_port <%= @port %>
 
-# cache
 <%- if @disable_cache -%>
+# disable cache
 cache deny all
 <%- end -%>
 
@@ -24,8 +24,17 @@ strip_query_terms <%= scope.function_bool2onoff([@strip_query_terms]) %>
 # Leave coredumps in the first cache dir
 coredump_dir <%= @coredump_dir %>
 
+<% if defined?(@visible_hostname) -%>
+visible_hostname = <%= @visible_hostname %>
+<% end -%>
+
+<% if !@builtin_acls -%>
 # localhost
-acl localhost src 127.0.0.0/8
+acl localhost src 127.0.0.1
+
+#manager
+acl manager proto cache_object
+<% end -%>
 
 <%- if defined?(@localnet) -%>
 # local networks
@@ -52,6 +61,13 @@ http_access <%= @unsafeports_action %> !Safe_ports
 
 # CONNECT to other than secure SSL ports
 http_access deny CONNECT !SSL_ports
+
+# MANAGER
+# Only allow cachemgr access from localhost
+<% @manager_allow.each do | val | -%>
+http_access allow <%= val %> manager
+<% end -%>
+http_access <%= @manager_default_rule %> manager
 
 #
 # TODO: extra rules

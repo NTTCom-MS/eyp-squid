@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.3
+
+* manager access rules (squidclient)
+* added a variable for visible_hostname
+* added 3128 as a safe port (to be able to get stats using squidclient)
+
 ## 0.1.2
 
 * added **squid::domain**
