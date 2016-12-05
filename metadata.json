@@ -2,7 +2,7 @@
   "name": "eyp-squid",
   "version": "0.1.3",
   "author": "eyp",
-  "summary": null,
+  "summary": "squid management",
   "license": "Apache-2.0",
   "source": "https://github.com/NTTCom-MS/eyp-squid",
   "project_page": null,

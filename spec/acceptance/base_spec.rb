@@ -17,5 +17,13 @@ describe 'squid class' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
+    it "sleep 10 to make sure squid is started" do
+      expect(shell("sleep 10").exit_code).to be_zero
+    end
+
+    describe port(3128) do
+      it { should be_listening }
+    end
+
   end
 end

@@ -164,6 +164,7 @@ have some test to check both presence and absence of any feature
 ### TODO
 
 * ACL management
+* upstream proxy: http://www.christianschenk.org/blog/using-a-parent-proxy-with-squid/
 
 ### Contributing
 

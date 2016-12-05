@@ -5,10 +5,10 @@
 class squid::config inherits squid {
 
   concat { $squid::params::config_file:
-    ensure  => 'present',
-    owner   => 'root',
-    group   => $squid::params::squid_username,
-    mode    => '0640',
+    ensure => 'present',
+    owner  => 'root',
+    group  => $squid::params::squid_username,
+    mode   => '0640',
   }
 
   concat::fragment{ "${squid::params::config_file} header":
