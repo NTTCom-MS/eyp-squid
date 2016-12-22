@@ -21,8 +21,10 @@ strip_query_terms <%= scope.function_bool2onoff([@strip_query_terms]) %>
 # Uncomment and adjust the following to add a disk cache directory.
 #cache_dir ufs /var/spool/squid 100 16 256
 
+<% if defined?(@coredump_dir) -%>
 # Leave coredumps in the first cache dir
 coredump_dir <%= @coredump_dir %>
+<% end -%>
 
 <% if defined?(@visible_hostname) -%>
 visible_hostname = <%= @visible_hostname %>

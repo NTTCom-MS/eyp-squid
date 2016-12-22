@@ -4,11 +4,19 @@ require_relative './version.rb'
 describe 'squid class' do
 
   context 'basic setup' do
+
+    it "workarround for ubuntu14.04 docker image" do
+      expect(shell("lsb_release -a | grep trusty; if [ $? -eq 0 ]; then mv /sbin/initctl /sbin/oldinitctl; echo -e '#!/bin/bash\nif [ $1 == \"--version\" ]\nthen\n  echo \"initctl (upstart 1.12.1)\"\nfi\n/sbin/oldinitctl \"$@\"' > /sbin/initctl; chmod 755 /sbin/initctl; fi").exit_code).to be_zero
+    end
+
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF
 
-      class { 'squid': }
+      class { 'squid':
+        visible_hostname => 'testsquid',
+        disable_cache => true,
+      }
 
       EOF
 
@@ -23,6 +31,19 @@ describe 'squid class' do
 
     describe port(3128) do
       it { should be_listening }
+    end
+
+    #/sbin/initctl --version
+    it "check init" do
+      expect(shell("/sbin/initctl --version").exit_code).to be_zero
+    end
+
+    it "debug ps" do
+      expect(shell("ps auxf").exit_code).to be_zero
+    end
+
+    it "debug netstat" do
+      expect(shell("netstat -tpln").exit_code).to be_zero
     end
 
   end

@@ -23,4 +23,20 @@ class squid::config inherits squid {
     content => template("${module_name}/squidconf_tail.erb"),
   }
 
+  if($squid::configure_logrotate)
+  {
+    if(defined(Class['logrotate']))
+    {
+      logrotate::logs { 'squid':
+        ensure        => present,
+        log           => [ '/var/log/squid/access.log' ],
+        rotate        => $squid::logrotate_rotate,
+        compress      => $squid::logrotate_compress,
+        missingok     => $squid::logrotate_missingok,
+        notifempty    => $squid::logrotate_notifempty,
+        frequency     => $squid::logrotate_frequency,
+      }
+    }
+  }
+
 }

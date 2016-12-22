@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.4
+
+* dropped centos5 support
+* added logrotate management
+
 ## 0.1.3
 
 * manager access rules (squidclient)
