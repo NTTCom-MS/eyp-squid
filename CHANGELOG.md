@@ -4,6 +4,7 @@
 
 * dropped centos5 support
 * added logrotate management
+* added cache_dir settings
 
 ## 0.1.3
 

@@ -35,6 +35,11 @@ class squid (
               $logrotate_missingok           = true,
               $logrotate_notifempty          = true,
               $logrotate_frequency           = 'weekly',
+              $cache_dir                     = '/var/spool/squid',
+              $cache_format                  = 'ufs',
+              $cache_l1                      = '16',
+              $cache_l2                      = '256',
+              $cache_size_mb                 = '100',
             ) inherits squid::params{
 
   class { '::squid::install': } ->

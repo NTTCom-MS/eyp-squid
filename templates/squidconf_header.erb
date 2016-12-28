@@ -8,6 +8,9 @@ http_port <%= @port %>
 <%- if @disable_cache -%>
 # disable cache
 cache deny all
+<% else -%>
+# cache_dir <type> <dir> <mbytes> <L1> <L2>
+cache_dir <%= @cache_format %> <%= @cache_dir %> <%= @cache_size_mb %> <%= @cache_l1 %> <%= @cache_l2 %>
 <%- end -%>
 
 # visibility options:
@@ -17,9 +20,6 @@ forwarded_for <%= scope.function_bool2onoff([@add_forwarded_for_header]) %>
 
 # query options logging
 strip_query_terms <%= scope.function_bool2onoff([@strip_query_terms]) %>
-
-# Uncomment and adjust the following to add a disk cache directory.
-#cache_dir ufs /var/spool/squid 100 16 256
 
 <% if defined?(@coredump_dir) -%>
 # Leave coredumps in the first cache dir

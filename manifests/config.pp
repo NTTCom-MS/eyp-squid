@@ -28,13 +28,13 @@ class squid::config inherits squid {
     if(defined(Class['logrotate']))
     {
       logrotate::logs { 'squid':
-        ensure        => present,
-        log           => [ '/var/log/squid/access.log' ],
-        rotate        => $squid::logrotate_rotate,
-        compress      => $squid::logrotate_compress,
-        missingok     => $squid::logrotate_missingok,
-        notifempty    => $squid::logrotate_notifempty,
-        frequency     => $squid::logrotate_frequency,
+        ensure     => 'present',
+        log        => [ '/var/log/squid/access.log' ],
+        rotate     => $squid::logrotate_rotate,
+        compress   => $squid::logrotate_compress,
+        missingok  => $squid::logrotate_missingok,
+        notifempty => $squid::logrotate_notifempty,
+        frequency  => $squid::logrotate_frequency,
       }
     }
   }
