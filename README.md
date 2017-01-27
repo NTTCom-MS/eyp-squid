@@ -53,6 +53,21 @@ class { 'squid':
 	}
 ```
 
+## Usage
+
+accesslog/logformat:
+
+```puppet
+squid::logformat { 'squid-demo':
+  format => 'timestamp="%{%Y-%m-%dT%H:%M:%S%z}tg" vendor="Squid" src=%>a url="%>ru" src_ip=%">a status=%<Hs http_user_agent="%{User-Agent}>h" http_method=%>rm http_content_type=%mt http_content_type_raw="%{Content-Type}<h" bytes_in=%<st bytes_out=%>st user=%un http_referer="%{Referer}>h" uri_path="%rp" url_port=%<p uri_scheme=%>rs duration=%<tt dest_port=%<p src_port=%>p dest_ip=%<a proxy_ip=%<la proxy_dest_port=%>lp proxy_src_port=%<lp dest_host=%{Host}>h',
+}
+
+squid::accesslog { '/var/log/squid/access.log':
+  logformat => 'squid-demo',
+}
+```
+
+squidclient example:
 ```
 # squidclient -h 127.0.0.1 -p 3128 mgr:info
 HTTP/1.1 200 OK
@@ -140,11 +155,6 @@ Internal Data Structures:
 	     0 on-disk objects
 ```
 
-## Usage
-
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
-
 ## Reference
 
 Here, list the classes, types, providers, facts, etc contained in your module.
@@ -163,7 +173,6 @@ have some test to check both presence and absence of any feature
 
 ### TODO
 
-* ACL management
 * upstream proxy: http://www.christianschenk.org/blog/using-a-parent-proxy-with-squid/
 
 ### Contributing

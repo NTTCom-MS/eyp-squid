@@ -2,6 +2,14 @@
 #
 # === squid::config documentation
 #
+# concat squid.conf
+#
+# 00 - header
+# 50 - allow domain
+# 60 - deny domain
+# 79 - logformat
+# 80 - accesslog
+# 99 - tail
 class squid::config inherits squid {
 
   concat { $squid::params::config_file:
