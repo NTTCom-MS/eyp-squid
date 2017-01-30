@@ -17,28 +17,19 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+squid management
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+This module setups and configures squid. It has limited ACL support
 
 ## Setup
 
 ### What squid affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* squid package management
+* squid configuration management
+* logrotation configurtion (only if eyp-logrotate is available)
 
 ### Setup Requirements
 
@@ -55,7 +46,7 @@ class { 'squid':
 
 ## Usage
 
-accesslog/logformat:
+### accesslog/logformat
 
 ```puppet
 squid::logformat { 'squid-demo':
@@ -67,7 +58,54 @@ squid::accesslog { '/var/log/squid/access.log':
 }
 ```
 
-squidclient example:
+### allow/deny domains
+
+```puppet
+squid::domain { '.systemadmin.es':
+  action => 'allow',
+}
+
+squid::domain { '.facebook.com':
+  action => 'deny',
+}
+
+squid::domain { '.meneame.net':
+  action => 'deny',
+}
+
+squid::domain { '.twitter.com':
+  action => 'deny',
+}
+```
+
+### acl management
+
+```puppet
+squid::acl { 'RHEL-UpdateServers':
+  type => 'dst',
+  values => [ 'subscription.rhn.redhat.com', 'subscription.rhsm.redhat.com' ],
+}
+```
+
+this generates the following ACLs:
+
+```
+acl RHEL-UpdateServers dst subscription.rhn.redhat.com
+acl RHEL-UpdateServers dst subscription.rhsm.redhat.com
+```
+
+### http_access management
+
+```puppet
+squid::httpaccess { 'RHEL-UpdateServers':
+}
+```
+
+```
+http_access allow RHEL-UpdateServers
+```
+
+### squidclient example
 ```
 # squidclient -h 127.0.0.1 -p 3128 mgr:info
 HTTP/1.1 200 OK
@@ -157,14 +195,84 @@ Internal Data Structures:
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+### classes
+
+#### squid
+
+* **port**:                          = '0.0.0.0:3128',
+* **disable_cache**:                 = true,
+* **httpd_suppress_version_string**: = true,
+* **add_via_header**:                = false,
+* **add_forwarded_for_header**:      = false,
+* **strip_query_terms**:             = true,
+* **coredump_dir**:                  = $squid::params::coredump_dir_default,
+* **localnet**:                      = [ '10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', 'fc00::/7', 'fe80::/10' ],
+* **ssl_ports**:                     = [ '443' ],
+* **safe_ports**:                    = [ '80', '21', '443', '3128' ],
+* **unsafeports_action**:            = 'deny',
+* **localnet_action**:               = 'allow',
+* **localhost_action**:              = 'allow',
+* **default_action**:                = 'deny',
+* **manage_package**:                = true,
+* **package_ensure**:                = 'installed',
+* **manage_service**:                = true,
+* **manage_docker_service**:         = true,
+* **service_ensure**:                = 'running',
+* **service_enable**:                = true,
+* **manager_allow**:                 = [ 'localhost' ],
+* **manager_default_rule**:          = 'deny',
+* **install_client**:                = true,
+* **visible_hostname**:              = undef,
+* **configure_logrotate**:           = true,
+* **logrotate_rotate**:              = '4',
+* **logrotate_compress**:            = true,
+* **logrotate_missingok**:           = true,
+* **logrotate_notifempty**:          = true,
+* **logrotate_frequency**:           = 'weekly',
+* **cache_dir**:                     = '/var/spool/squid',
+* **cache_format**:                  = 'ufs',
+* **cache_l1**:                      = '16',
+* **cache_l2**:                      = '256',
+* **cache_size_mb**:                 = '100',
+
+### defines
+
+#### accesslog
+
+* **path**:      = $name,
+* **module**:    = 'daemon',
+* **logformat**: = 'squid',
+
+#### domain
+
+* **domainname**: = $name,
+* **action**:     = 'deny',
+* **order**:      = undef,
+
+#### logformat
+
+* **format**:,
+* **logname**: = $name,
+
+#### httpaccess
+
+* **aclname**:        = $name,
+* **action**:         = 'allow',
+* **inverse**:        = false,
+* **description**:    = undef,
+* **order**:          = '0',
+
+#### acl
+
+* **type**:
+* **values**:
+* **aclname**:     = $name,
+* **order**:       = '0',
+* **description**: = undef,
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Manually validated on CentOS 7
 
 ## Development
 

@@ -1,0 +1,10 @@
+<% if defined?(@description) -%>
+# <%= @description %>
+<% end -%>
+<% if @values.kind_of?(Array) -%>
+<% @values.each do | val | -%>
+acl <%= @aclname %> <%= @type %> <%= val %>
+<% end -%>
+<% else -%>
+acl <%= @aclname %> <%= @type %> <%= @values %>
+<% end -%>

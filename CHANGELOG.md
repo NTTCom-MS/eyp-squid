@@ -4,6 +4,8 @@
 
 * added **squid::accesslog**
 * added **squid::logformat**
+* added **squid::acl**
+* added **squid::httpaccess**
 
 ## 0.1.4
 
