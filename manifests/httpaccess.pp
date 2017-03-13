@@ -1,9 +1,8 @@
 # http_access allow RHEL-UpdateServers
 # http_access allow|deny [!]aclname ..
 define squid::httpaccess(
-                          $aclname        = $name,
+                          $acls           = [ $name ],
                           $action         = 'allow',
-                          $inverse        = false,
                           $description    = undef,
                           $order          = '0',
                         ) {

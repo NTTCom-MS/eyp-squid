@@ -256,11 +256,10 @@ Internal Data Structures:
 
 #### httpaccess
 
-* **aclname**:        = $name,
-* **action**:         = 'allow',
-* **inverse**:        = false,
-* **description**:    = undef,
-* **order**:          = '0',
+* **acls**: [ $name ]
+* **action**: 'allow'
+* **description**: undef
+* **order**: '0'
 
 #### acl
 

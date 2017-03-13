@@ -40,6 +40,7 @@ class squid (
               $cache_l1                      = '16',
               $cache_l2                      = '256',
               $cache_size_mb                 = '100',
+              $add_default_localnet_rule     =  true,
             ) inherits squid::params{
 
   class { '::squid::install': } ->

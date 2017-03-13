@@ -45,7 +45,7 @@ class squid::params {
         {
           case $::operatingsystemrelease
           {
-            /^14.*$/:
+            /^1[46].*$/:
             {
               $coredump_dir_default='/var/spool/squid'
               $builtin_acls = true

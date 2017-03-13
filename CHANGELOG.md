@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.6
+
+* modified **squid::httpaccess** to allow multiple ACLs
+* added a variable (**add_default_localnet_rule**) if a default http_access rule needs to be included for localnet
+
 ## 0.1.5
 
 * added **squid::accesslog**
