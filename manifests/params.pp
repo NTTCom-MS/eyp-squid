@@ -33,10 +33,6 @@ class squid::params {
     }
     'Debian':
     {
-      $package_name = 'squid3'
-      $service_name = 'squid3'
-
-      $config_file = '/etc/squid3/squid.conf'
       $squid_username = 'proxy'
 
       case $::operatingsystem
@@ -45,8 +41,24 @@ class squid::params {
         {
           case $::operatingsystemrelease
           {
-            /^1[46].*$/:
+            /^14.*$/:
             {
+              $package_name = 'squid3'
+              $service_name = 'squid3'
+
+              $config_file = '/etc/squid3/squid.conf'
+
+              $coredump_dir_default='/var/spool/squid'
+              $builtin_acls = true
+              $client_package_name = 'squidclient'
+            }
+            /^16.*$/:
+            {
+              $package_name = 'squid'
+              $service_name = 'squid'
+
+              $config_file = '/etc/squid/squid.conf'
+
               $coredump_dir_default='/var/spool/squid'
               $builtin_acls = true
               $client_package_name = 'squidclient'

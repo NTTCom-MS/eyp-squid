@@ -7,6 +7,7 @@
 # 00 - header
 # 30 - ACL
 # 40 - http_access
+# 40 - follow xff
 # 50 - allow domain
 # 60 - deny domain
 # 79 - logformat

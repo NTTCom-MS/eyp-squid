@@ -1,16 +1,16 @@
 {
   "name": "eyp-squid",
-  "version": "0.1.6",
+  "version": "0.1.9",
   "author": "eyp",
   "summary": "squid management",
   "license": "Apache-2.0",
   "source": "https://github.com/NTTCom-MS/eyp-squid",
-  "project_page": null,
+  "project_page": "https://github.com/NTTCom-MS/eyp-squid",
   "issues_url": "https://github.com/NTTCom-MS/eyp-squid/issues",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0 < 9.9.9"},
     {"name":"eyp/eyplib","version_requirement":">= 0.1.0 < 0.2.0"},
-    {"name":"puppetlabs/concat","version_requirement":">= 1.2.3"}
+    {"name":"puppetlabs/concat","version_requirement":">= 1.2.3 < 9.9.9"}
   ],
   "operatingsystem_support": [
     {
@@ -35,14 +35,10 @@
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "14.04" ]
+      "operatingsystemrelease": [ "16.04" ]
     }
   ],
   "requirements": [
-    {
-      "name": "pe",
-      "version_requirement": ">= 3.0.0"
-    },
     {
       "name": "puppet",
       "version_requirement": ">= 3.0.0"

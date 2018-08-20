@@ -44,6 +44,22 @@ class { 'squid':
 	}
 ```
 
+basic hiera setup:
+
+```
+---
+classes:
+  - squid
+squid::safe_ports:
+  - 80
+  - 21
+  - 443
+  - 3128
+  - 8080
+squid::localnet:
+  - '10.12.128.0/24'
+```
+
 ## Usage
 
 ### accesslog/logformat
@@ -263,8 +279,8 @@ Internal Data Structures:
 
 #### acl
 
-* **type**:
 * **values**:
+* **type**: (defalt: src)
 * **aclname**:     = $name,
 * **order**:       = '0',
 * **description**: = undef,

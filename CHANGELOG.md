@@ -1,9 +1,21 @@
 # CHANGELOG
 
+## 0.1.9
+
+* added **squid::followxff**
+
+## 0.1.8
+
+* bugfix: Ubuntu 16 squid.conf file
+
+## 0.1.7
+
+* updated user defined rules banner
+
 ## 0.1.6
 
 * modified **squid::httpaccess** to allow multiple ACLs
-* added a variable (**add_default_localnet_rule**) if a default http_access rule needs to be included for localnet
+* added a variable (**add_default_localnet_rule**) if a default **http_access** rule needs to be included for localnet
 
 ## 0.1.5
 
