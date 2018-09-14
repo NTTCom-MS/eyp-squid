@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.10
+
+* Allow http_port to be an array
+
 ## 0.1.9
 
 * added **squid::followxff**

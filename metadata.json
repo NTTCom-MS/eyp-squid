@@ -1,6 +1,6 @@
 {
   "name": "eyp-squid",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "author": "eyp",
   "summary": "squid management",
   "license": "Apache-2.0",
@@ -41,7 +41,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.0.0"
+      "version_requirement": ">= 3.8.0"
     }
   ]
 }

@@ -3,7 +3,14 @@
 #
 
 # Squid normally listens to port 3128
+
+<% if @port.kind_of?(Array) -%>
+<% @port.each do | value | -%>
+http_port <%= value %>
+<% end -%>
+<% else -%>
 http_port <%= @port %>
+<% end -%>
 
 <%- if @disable_cache -%>
 # disable cache
