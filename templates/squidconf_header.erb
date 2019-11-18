@@ -39,6 +39,10 @@ visible_hostname <%= @visible_hostname %>
 
 memory_pools <%= scope.function_bool2onoff([@memory_pools]) %>
 
+<% if defined?(@cache_log) -%>
+cache_log <%= @cache_log %>
+<% end -%>
+
 <% if !@builtin_acls -%>
 # localhost
 acl localhost src 127.0.0.1

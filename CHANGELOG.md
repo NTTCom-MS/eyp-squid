@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.17
+
+* added **cache_log**
+
 ## 0.1.16
 
 * added cache_store_log directive
