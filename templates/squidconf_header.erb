@@ -37,6 +37,8 @@ coredump_dir <%= @coredump_dir %>
 visible_hostname = <%= @visible_hostname %>
 <% end -%>
 
+memory_pools=<%= scope.function_bool2onoff([@memory_pools]) %>
+
 <% if !@builtin_acls -%>
 # localhost
 acl localhost src 127.0.0.1

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.14
+
+* added memory_pools flag
+
 ## 0.1.13
 
 * hability to set **access_log** to none
