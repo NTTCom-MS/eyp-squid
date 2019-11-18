@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.16
+
+* added cache_store_log directive
+
 ## 0.1.15
 
 * fixed syntax bug

@@ -1,0 +1,6 @@
+
+<% if @none -%>
+cache_store_log none
+<% else -%>
+cache_store_log <%= @module %>:<%= @path %> <%= @logformat %>
+<% end -%>
