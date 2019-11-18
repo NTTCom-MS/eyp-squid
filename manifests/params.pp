@@ -66,7 +66,25 @@ class squid::params {
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
-        'Debian': { fail('Unsupported')  }
+        'Debian':
+        {
+          $package_name = 'squid'
+          $service_name = 'squid'
+
+          $config_file = '/etc/squid/squid.conf'
+
+          $coredump_dir_default='/var/spool/squid'
+          $builtin_acls = true
+          $client_package_name = 'squidclient'
+
+          case $::operatingsystemrelease
+          {
+            /^10.*$/:
+            {
+            }
+            default: { fail("Unsupported Debian version! - ${::operatingsystemrelease}")  }
+          }
+        }
         default: { fail('Unsupported Debian flavour!')  }
       }
     }

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.11
+
+* added support for **Debian 10**
+
 ## 0.1.10
 
 * Allow http_port to be an array
