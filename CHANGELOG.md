@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.12
+
+* hability to set **access_log** to none
+
 ## 0.1.11
 
 * added support for **Debian 10**

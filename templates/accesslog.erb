@@ -1,2 +1,6 @@
 
+<% if $none -%>
+access_log none
+<% else -%>
 access_log <%= @module %>:<%= @path %> <%= @logformat %>
+<% end -%>

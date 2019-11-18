@@ -3,6 +3,7 @@ define squid::accesslog (
                           $path      = $name,
                           $module    = 'daemon',
                           $logformat = 'squid',
+                          $none      = false,
                         ) {
 
   # access_log <module>:<place> [option ...] [acl acl ...]
