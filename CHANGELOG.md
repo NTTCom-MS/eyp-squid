@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.15
+
+* fixed syntax bug
+
 ## 0.1.14
 
 * added memory_pools flag

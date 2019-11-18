@@ -34,10 +34,10 @@ coredump_dir <%= @coredump_dir %>
 <% end -%>
 
 <% if defined?(@visible_hostname) -%>
-visible_hostname = <%= @visible_hostname %>
+visible_hostname <%= @visible_hostname %>
 <% end -%>
 
-memory_pools=<%= scope.function_bool2onoff([@memory_pools]) %>
+memory_pools <%= scope.function_bool2onoff([@memory_pools]) %>
 
 <% if !@builtin_acls -%>
 # localhost
